@@ -10,7 +10,7 @@ public class QuotaCountBase : BaseUnityPlugin
     // plugin info
     internal const string PLUGIN_GUID = "frare.QuotaCount";
     internal const string PLUGIN_NAME = "Quota Count";
-    internal const string PLUGIN_VERSION = "1.0.0";
+    internal const string PLUGIN_VERSION = "1.0.1";
 
     // singleton
     internal static QuotaCountBase Instance;
