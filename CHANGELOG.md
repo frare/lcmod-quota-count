@@ -1,5 +1,5 @@
 ## 1.1.3
-Fixed a typo causing the quota count to display absurd values based no scrap sold
+Fixed a typo causing the quota count to display absurd values based on scrap sold
 
 ## 1.1.2
 Fixed the package not containing the dll... oops
