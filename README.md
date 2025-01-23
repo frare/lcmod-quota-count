@@ -10,7 +10,9 @@ Message me on Discord for any suggestions and questions! username: frare
 <b>Displays current quota count</b> on the vanilla ship monitors where "Profit Quota" and "Deadline" show up.
 This helps knowing on which quota your crew is currently at, like Q1, Q3, Q10, etc.
 <br><br>
-Now also displays quotas fulfilled on the game over screen!
+Also displays quotas fulfilled on the "YOU ARE FIRED" game over screen.
+<br><br>
+Now configurable!
 
 ## Gallery
 ![Profit quota monitor](https://github.com/frare/lcmod-quota-count/blob/main/img/monitors.jpeg?raw=true)

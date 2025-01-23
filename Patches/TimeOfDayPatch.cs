@@ -12,11 +12,17 @@ internal static class TimeOfDayPatch
             $"Patching \"TimeOfDay UpdateProfitQuotaCurrentTime\"..."
         );
 
-        var profitQuotaMonitorText = StartOfRound.Instance.profitQuotaMonitorText;
-        profitQuotaMonitorText.text = $"{QuotaCountBase.CurrentQuotaString} PROFIT:\n${__instance.quotaFulfilled} / ${__instance.profitQuota}";
+        if (QuotaCountBase.DisplayInProfit)
+        {
+            var profitQuotaMonitorText = StartOfRound.Instance.profitQuotaMonitorText;
+            profitQuotaMonitorText.text = $"{QuotaCountBase.CurrentQuotaString} PROFIT:\n${__instance.quotaFulfilled} / ${__instance.profitQuota}";
+        }
 
-        var deadlineMonitorText = StartOfRound.Instance.deadlineMonitorText;
-        deadlineMonitorText.text = $"{QuotaCountBase.CurrentQuotaString + "\n"}" + deadlineMonitorText.text;
+        if (QuotaCountBase.DisplayInDeadline)
+        {
+            var deadlineMonitorText = StartOfRound.Instance.deadlineMonitorText;
+            deadlineMonitorText.text = $"{QuotaCountBase.CurrentQuotaString + "\n"}" + deadlineMonitorText.text;
+        }
 
         QuotaCountBase.LogMessage("Done!");
     }

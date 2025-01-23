@@ -11,6 +11,8 @@ internal static class HUDManagerPatch
     [HarmonyPatch("Start"), HarmonyPostfix]
     public static void StartPostfix(ref HUDManager __instance)
     {
+        if (!QuotaCountBase.DisplayInGameOver) return;
+
         QuotaCountBase.LogMessage(
             $"Patching \"HUDManager Start\"..."
         );
