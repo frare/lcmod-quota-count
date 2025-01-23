@@ -9,22 +9,15 @@ internal static class TimeOfDayPatch
     internal static void UpdateProfitQuotaCurrentTimePostfix(ref TimeOfDay __instance)
     {
         QuotaCountBase.LogMessage(
-            $"Patching \"TimeOfDay UpdateProfitQuotaCurrentTime\"...",
-            BepInEx.Logging.LogLevel.Debug
+            $"Patching \"TimeOfDay UpdateProfitQuotaCurrentTime\"..."
         );
 
-        StartOfRound.Instance.profitQuotaMonitorText.text = 
-            $"QUOTA {__instance.timesFulfilledQuota+1} PROFIT:\n${__instance.quotaFulfilled} / ${__instance.profitQuota}";
+        var profitQuotaMonitorText = StartOfRound.Instance.profitQuotaMonitorText;
+        profitQuotaMonitorText.text = $"{QuotaCountBase.CurrentQuotaString} PROFIT:\n${__instance.quotaFulfilled} / ${__instance.profitQuota}";
 
-        if (__instance.timeUntilDeadline <= 0f)
-        {
-            StartOfRound.Instance.deadlineMonitorText.text = $"QUOTA {__instance.timesFulfilledQuota+1} DEADLINE:\nNOW";
-        }
-        else
-        {
-            StartOfRound.Instance.deadlineMonitorText.text = $"QUOTA {__instance.timesFulfilledQuota+1} DEADLINE:\n{__instance.daysUntilDeadline} Days";
-        }
+        var deadlineMonitorText = StartOfRound.Instance.deadlineMonitorText;
+        deadlineMonitorText.text = $"{QuotaCountBase.CurrentQuotaString + "\n"}" + deadlineMonitorText.text;
 
-        QuotaCountBase.LogMessage("Done!", BepInEx.Logging.LogLevel.Debug);
+        QuotaCountBase.LogMessage("Done!");
     }
 }

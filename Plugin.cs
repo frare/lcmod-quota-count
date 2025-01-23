@@ -10,7 +10,7 @@ public class QuotaCountBase : BaseUnityPlugin
     // plugin info
     internal const string PLUGIN_GUID = "frare.QuotaCount";
     internal const string PLUGIN_NAME = "Quota Count";
-    internal const string PLUGIN_VERSION = "1.0.1";
+    internal const string PLUGIN_VERSION = "1.1.0";
 
     // singleton
     internal static QuotaCountBase Instance;
@@ -20,6 +20,8 @@ public class QuotaCountBase : BaseUnityPlugin
 
     // for debugging
     internal ManualLogSource logger;
+
+    public static string CurrentQuotaString { get => $"QUOTA {TimeOfDay.Instance.quotaFulfilled + 1}"; }
 
     private void Awake()
     {
