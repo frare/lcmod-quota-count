@@ -21,7 +21,7 @@ internal static class HUDManagerPatch
         var quotaText = textComponents.First(component => component.text.Contains("quota", StringComparison.OrdinalIgnoreCase));
         if (quotaText != null)
         {
-            quotaText.text = quotaText.text + $"\n<b>TOTAL QUOTAS FULFILLED: {TimeOfDay.Instance.quotaFulfilled}</b>";
+            quotaText.text = quotaText.text + $"\n<b>TOTAL QUOTAS FULFILLED: {TimeOfDay.Instance.timesFulfilledQuota}</b>";
         }
         else
         {

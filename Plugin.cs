@@ -10,7 +10,7 @@ public class QuotaCountBase : BaseUnityPlugin
     // plugin info
     internal const string PLUGIN_GUID = "frare.QuotaCount";
     internal const string PLUGIN_NAME = "Quota Count";
-    internal const string PLUGIN_VERSION = "1.1.0";
+    internal const string PLUGIN_VERSION = "1.1.3";
 
     // singleton
     internal static QuotaCountBase Instance;
@@ -27,7 +27,7 @@ public class QuotaCountBase : BaseUnityPlugin
     public static bool DisplayInGameOver { get; private set; }
     public static bool StartAtZero { get; private set; }
 
-    public static string CurrentQuotaString { get => $"QUOTA {TimeOfDay.Instance.quotaFulfilled + (StartAtZero ? 0 : 1)}"; }
+    public static string CurrentQuotaString { get => $"QUOTA {TimeOfDay.Instance.timesFulfilledQuota + (StartAtZero ? 0 : 1)}"; }
 
     private void Awake()
     {
@@ -49,8 +49,6 @@ public class QuotaCountBase : BaseUnityPlugin
         DisplayInProfit = Config.Bind("General", "DisplayInProfitQuotaMonitor", true, "Display count in PROFIT QUOTA monitor").Value;
         DisplayInDeadline = Config.Bind("General", "DisplayInDeadlineMonitor", true, "Display count in DEADLINE monitor").Value;
         DisplayInGameOver = Config.Bind("General", "DisplayInGameOverScreen", true, "Display total quotas fulfilled in YOU ARE FIRED screen").Value;
-
-        LogMessage($"DisplayInProfit:{DisplayInProfit} / DisplayInDeadline:{DisplayInDeadline} / DisplayInGameOver:{DisplayInGameOver}");
     }
 
     public static void LogMessage(string message, LogLevel logLevel = LogLevel.Debug)
