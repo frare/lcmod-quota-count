@@ -1,9 +1,8 @@
 {
     "name": "QuotaCount",
-    "version_number": "1.0.1",
-    "website_url": "https://github.com/frare/lcmod-quota-count",
-    "donationUrl": "https://ko-fi.com/frare",
-    "description": "Displays current quota count on ship monitors",
+    "version_number": "1.1.0",
+    "website_url": "",
+    "description": "Displays quota count on ship monitors and game over screen",
     "dependencies": [
         "BepInEx-BepInExPack-5.4.2100"
     ]
