@@ -8,24 +8,54 @@ namespace QuotaCount.Patches;
 [HarmonyPatch(typeof(HUDManager))]
 internal static class HUDManagerPatch
 {
-    [HarmonyPatch("Start"), HarmonyPostfix]
-    public static void StartPostfix(ref HUDManager __instance)
-    {
-        if (!QuotaCountBase.DisplayInGameOver) return;
+    private static TextMeshProUGUI tmp;
+    private static string originalText;
 
+    [HarmonyPatch("Awake"), HarmonyPostfix]
+    internal static void AwakePostfix(ref HUDManager __instance)
+    {
         QuotaCountBase.LogMessage(
-            $"Patching \"HUDManager Start\"..."
+            $"Patching \"HUDManager Awake\"..."
         );
 
         var textComponents = __instance.playersFiredAnimator.GetComponentsInChildren<TextMeshProUGUI>();
-        var quotaText = textComponents.First(component => component.text.Contains("quota", StringComparison.OrdinalIgnoreCase));
-        if (quotaText != null)
+        tmp = textComponents.First(component => component.text.Contains("quota", StringComparison.OrdinalIgnoreCase));
+        originalText = tmp.text;
+        QuotaCountBase.LogMessage("Static TMP component reference and original text are ready");
+
+        if (tmp == null)
         {
-            quotaText.text = quotaText.text + $"\n<b>TOTAL QUOTAS FULFILLED: {TimeOfDay.Instance.timesFulfilledQuota}</b>";
+            QuotaCountBase.LogMessage($"Could not find the TMP component containing profit quota text", BepInEx.Logging.LogLevel.Error);
+            return;
+        }
+
+        QuotaCountBase.LogMessage("Done!");
+    }
+
+    [HarmonyPatch("ShowPlayersFiredScreen"), HarmonyPostfix]
+    internal static void ShowPlayersFiredScreenPostfix(ref HUDManager __instance, bool show)
+    {
+        if (show == false) return;
+
+        QuotaCountBase.LogMessage(
+            $"Patching \"HUDManager ShowPlayersFiredScreen\"..."
+        );
+
+        if (QuotaCountBase.DisplayInGameOver == false)
+        {
+            QuotaCountBase.LogMessage("NOT UPDATING GAME OVER SCREEN:Config is set to false");
+            return;
+        }
+
+        if (tmp != null)
+        {
+            tmp.text = originalText + "\nTOTAL QUOTAS FULFILLED: " + TimeOfDay.Instance.timesFulfilledQuota;
+            QuotaCountBase.LogMessage("Updated game over screen");
         }
         else
         {
-            QuotaCountBase.LogMessage($"Could not find the TMP component containing profit quota text", BepInEx.Logging.LogLevel.Error);
+            QuotaCountBase.LogMessage("Could not find the static TMP component reference", BepInEx.Logging.LogLevel.Error);
+            return;
         }
 
         QuotaCountBase.LogMessage("Done!");
