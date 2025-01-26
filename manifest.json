@@ -1,6 +1,6 @@
 {
     "name": "QuotaCount",
-    "version_number": "1.1.3",
+    "version_number": "1.1.5",
     "website_url": "",
     "description": "Displays quota count on ship monitors and game over screen. Configurable!",
     "dependencies": [
