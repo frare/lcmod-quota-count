@@ -2,7 +2,7 @@
 
 I made this because I couldn't find a quota counter ingame, so the mod makes it easier to set objectives like reaching quota 10, without relying purely on quota <i>values</i> or memorizing how many quotas were met.
 <br><br>
-Message me on Discord for any suggestions and questions! username: frare
+Message me on Discord for any suggestions, issues and questions! username: frare
 <br><br>
 [<img src="https://storage.ko-fi.com/cdn/kofi2.png?v=6" width=143 height=36>](https://ko-fi.com/frare)
 
