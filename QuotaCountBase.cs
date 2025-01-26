@@ -10,13 +10,13 @@ public class QuotaCountBase : BaseUnityPlugin
     // plugin info
     internal const string PLUGIN_GUID = "frare.QuotaCount";
     internal const string PLUGIN_NAME = "Quota Count";
-    internal const string PLUGIN_VERSION = "1.1.3";
+    internal const string PLUGIN_VERSION = "1.1.5";
 
     // singleton
     internal static QuotaCountBase Instance;
 
     // harmony instance
-    private readonly Harmony harmony = new Harmony(PLUGIN_GUID);
+    private readonly Harmony harmony = new(PLUGIN_GUID);
 
     // for debugging
     internal ManualLogSource logger;
@@ -25,9 +25,8 @@ public class QuotaCountBase : BaseUnityPlugin
     public static bool DisplayInProfit { get; private set; }
     public static bool DisplayInDeadline { get; private set; }
     public static bool DisplayInGameOver { get; private set; }
-    public static bool StartAtZero { get; private set; }
 
-    public static string CurrentQuotaString { get => $"QUOTA {TimeOfDay.Instance.timesFulfilledQuota + (StartAtZero ? 0 : 1)}"; }
+    public static string CurrentQuotaString { get => $"QUOTA {TimeOfDay.Instance.timesFulfilledQuota + 1}"; }
 
     private void Awake()
     {
@@ -45,10 +44,9 @@ public class QuotaCountBase : BaseUnityPlugin
 
     private void LoadFromConfig()
     {
-        StartAtZero = Config.Bind("General", "StartAtZero", false, "Should monitors display the first quota as 'Quota 0' instead of 'Quota 1?'").Value;
         DisplayInProfit = Config.Bind("General", "DisplayInProfitQuotaMonitor", true, "Display count in PROFIT QUOTA monitor").Value;
         DisplayInDeadline = Config.Bind("General", "DisplayInDeadlineMonitor", true, "Display count in DEADLINE monitor").Value;
-        DisplayInGameOver = Config.Bind("General", "DisplayInGameOverScreen", true, "Display total quotas fulfilled in YOU ARE FIRED screen").Value;
+        DisplayInGameOver = Config.Bind("General", "DisplayInGameOverScreen", true, "Display total quotas fulfilled in the YOU ARE FIRED screen (game over screen)").Value;
     }
 
     public static void LogMessage(string message, LogLevel logLevel = LogLevel.Debug)
