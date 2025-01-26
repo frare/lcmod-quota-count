@@ -14,14 +14,16 @@ internal static class TimeOfDayPatch
 
         if (QuotaCountBase.DisplayInProfit)
         {
-            var profitQuotaMonitorText = StartOfRound.Instance.profitQuotaMonitorText;
-            profitQuotaMonitorText.text = $"{QuotaCountBase.CurrentQuotaString} PROFIT:\n${__instance.quotaFulfilled} / ${__instance.profitQuota}";
+            var profitQuotaMonitor = StartOfRound.Instance.profitQuotaMonitorText;
+            profitQuotaMonitor.text = $"{QuotaCountBase.CurrentQuotaString} PROFIT:\n${__instance.quotaFulfilled} / ${__instance.profitQuota}";
+            QuotaCountBase.LogMessage("Updated profit quota monitor");
         }
 
         if (QuotaCountBase.DisplayInDeadline)
         {
-            var deadlineMonitorText = StartOfRound.Instance.deadlineMonitorText;
-            deadlineMonitorText.text = $"{QuotaCountBase.CurrentQuotaString + "\n"}" + deadlineMonitorText.text;
+            var deadlineMonitor = StartOfRound.Instance.deadlineMonitorText;
+            deadlineMonitor.text = $"{QuotaCountBase.CurrentQuotaString} DEADLINE:\n{(__instance.daysUntilDeadline <= 0 ? "NOW" : __instance.daysUntilDeadline + " Days")}";
+            QuotaCountBase.LogMessage("Updating deadline monitor");
         }
 
         QuotaCountBase.LogMessage("Done!");
